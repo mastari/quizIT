@@ -36,11 +36,16 @@
         <input type="text" id="question" />
         <p>Answer:</p>
         <input type="text" id="answer" />
+        <p class="extrap">Question 2:</p>
+        <input type="text" id="question2" />
+        <p class="extrap">Answer 2:</p>
+        <input type="text" id="answer2" />
         <br>
         <br>
         
         <button id="finish">Publish Quiz</button>
 </div>
+<button type="button" id="questionadd">Add Another Question</button>
 
         </div>
         <script>
@@ -66,11 +71,25 @@
                 var quiz = {
                   name: $("#name").val(),
                   question: $("#question").val(),
-                  answer: $("#answer").val()
+                  answer: $("#answer").val(),
+                  question2: $("#question2").val(),
+                  answer2: $("#answer2").val()
                 }
                 quizesRef.push(quiz);
                 location.href = "index.html"
+                
             });
+            $(document).ready(function(){
+              $(".extrap").hide();
+              $("#question2").hide();
+        $("#answer2").hide();
+    $("#questionadd").click(function(){
+        $("#questionadd").hide();
+        $("#question2").show();
+        $("#answer2").show();
+        $(".extrap").show();
+    }); });
+    
         </script>
     </body>
 </html>

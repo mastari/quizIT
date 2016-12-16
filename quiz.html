@@ -28,7 +28,13 @@
         <p id="question"></p>
         <input type="text" id="answer" /><br><br>
         <button id="check">Check</button>
-        <p id="correct"></p>
+        <p id="correct"></p><br><br>
+        <p id="q2">Question 2:</p>
+        <p id="question2"></p>
+        <input type="text" id="answer2" /><br><br>
+        <button id="check2">Check</button>
+        <p id="correct2"></p>
+        
 </div>
         <script>
             var config = {
@@ -46,8 +52,16 @@
             
             quizRef.once('value', function(newquiz) {
                 quiz = newquiz.val();
-                $("#quizname").append(quiz["name"])
+                $("#quizname").append(quiz["name"]);
                 $("#question").append(quiz["question"]);
+                if (quiz["question2"] != ""){
+                $("#question2").append(quiz["question2"]);
+                } else {
+                    $("#question2").hide();
+                    $("#answer2").hide();
+                    $("#check2").hide();
+                    $("#q2").hide();
+                }
             });
 
             $("#check").click(function() {
@@ -56,12 +70,21 @@
                 if(answer == quiz["answer"]) {
                     c.empty();
                     c.append("Correct!");
-                } else {
+                }  else {
                     c.empty();
-                    c.append("Incorrect!");
-                }
+                    c.append("Incorrect!"); }
             });
-
+            $("#check2").click(function() {
+                var answer = $("#answer2").val();
+                var c = $("#correct2");
+                if(answer == quiz["answer2"]) {
+                    c.empty();
+                    c.append("Correct!");
+                }  else {
+                    c.empty();
+                    c.append("Incorrect!"); }
+            });
+        
             function getUrlVars() {
                 var vars = [], hash;
                 var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
@@ -72,7 +95,6 @@
                 }
                 return vars;
             }
-
         </script>
     </body>
 </html>
