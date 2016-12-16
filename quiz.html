@@ -24,17 +24,20 @@
 </nav> 
 <div class="items">
         <h1 id="quizname"></h1>
-        <p>Question:</p>
+        <p><strong>Question:</strong></p>
         <p id="question"></p>
         <input type="text" id="answer" /><br><br>
         <button id="check">Check</button>
         <p id="correct"></p><br><br>
-        <p id="q2">Question 2:</p>
+        <p id="q2"><strong>Question 2:</strong></p>
         <p id="question2"></p>
         <input type="text" id="answer2" /><br><br>
         <button id="check2">Check</button>
-        <p id="correct2"></p>
         
+        <p id="correct2"></p>
+<br><br><br><br><br>
+<p id="sharewfriends"><strong>Want to share this QuizIT with friends? Copy the share link!</strong></p>
+        <input type="text" value="" id="sharecode">
 </div>
         <script>
             var config = {
@@ -95,6 +98,8 @@
                 }
                 return vars;
             }
+            var share = $("#sharecode").val();
+            $('#sharecode').val(window.location.href);
         </script>
     </body>
 </html>
