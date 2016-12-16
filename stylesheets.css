@@ -1,38 +1,23 @@
-#nav {
-	margin-top: -16px;
-	margin-left: -8px;
-}
+/*.center {
+  /*text-align: center;
+  vertical-align: middle;
+  font-size: 60px;
+  font-family: Arial, Helvetica, sans-serif;
+  color: seagreen;
+  font-weight: bold;
+   display: table;
+   overflow: hidden;
+   display: table-cell; 
+   vertical-align: middle;
+   
+}*/
 
-#nav ul {
-	list-style-type: none;
-	overflow: hidden;
-	background-color: green;
-}
-#nav li {
-	float: left;
-	padding-left: 500px;
-	padding-top: -50px; 
-}
-
-#nav li a {
-	display: block;
-	color: white;
-	text-align: center;
-	padding: 14px 16px;
-	text-decoration: none;
-}
-#quiz {
-	color:red
-}
-
-#account {
+.center {
   text-align: center;
   font-size: 60px;
   font-family: Arial, Helvetica, sans-serif;
   color: seagreen;
   font-weight: bold;
-}
-#start {
   border-style: solid;
   border-width: 3px;
   text-decoration: none;
