@@ -54,14 +54,15 @@
                 quiz = newquiz.val();
                 $("#quizname").append(quiz["name"]);
                 $("#question").append(quiz["question"]);
-                if (quiz["question2"] != ""){
-                $("#question2").append(quiz["question2"]);
+                if (quiz["question2"] != "") {
+                    $("#question2").append(quiz["question2"]);
                 } else {
+                    alert("Doesn't Exsist");
                     $("#question2").hide();
                     $("#answer2").hide();
                     $("#check2").hide();
                     $("#q2").hide();
-                }
+            }
             });
 
             $("#check").click(function() {
