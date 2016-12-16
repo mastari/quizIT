@@ -15,5 +15,29 @@
                 <th>Name</th>
             </thead>
         </table>
+
+        <script>
+            var config = {
+                apiKey: "AIzaSyDwWGylVWs-p5R1d02KMXBgGW707QERx50",
+                authDomain: "teachus-1cf29.firebaseapp.com",
+                databaseURL: "https://teachus-1cf29.firebaseio.com",
+                storageBucket: "teachus-1cf29.appspot.com",
+                messagingSenderId: "562479337915"
+            };
+            firebase.initializeApp(config);
+
+            var database = firebase.database();
+            var quizesRef = database.ref("quizes");
+            quizesRef.once('value').then((snap) => {
+                let data = snap.val();
+                var keys = Object.keys(data);
+                for(var i = 0; i < keys.length; i++) {
+                    var key = keys[i];
+                    var quiz = data[key];
+                    var quizname = quiz["name"];
+                    $("table").append('<tr><td><a href="quiz.html?id='+key+'">'+quizname+'</a></td></tr>');
+                }
+            });
+        </script>
     </body>
 </html>
