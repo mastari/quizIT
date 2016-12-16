@@ -8,6 +8,9 @@
     <body>
         <p>question 1:</p>
         <p id="question"></p>
+        <input type="text" id="answer" />
+        <button id="check">check</button>
+        <p id="correct"></p>
 
         <script>
             var config = {
@@ -20,15 +23,26 @@
             firebase.initializeApp(config);
 
             var database = firebase.database();
-            var qRef = database.ref("question")
+            var quizRef = database.ref("/");
             var text;
             
-            qRef.once('value', function(textt) {
+            quizRef.once('value', function(textt) {
                 text = textt.val();
-                $("#question").append(text);
+                $("#question").append(text["question"]);
+                //$("#answer").append(text["answer"]);
             });
 
-            
+            $("#check").click(function() {
+                var answer = $("#answer").val();
+                var c = $("#correct");
+                if(answer == text["answer"]) {
+                    c.empty();
+                    c.append("Correct!");
+                } else {
+                    c.empty();
+                    c.append("Incorrect!");
+                }
+            });
 
         </script>
     </body>

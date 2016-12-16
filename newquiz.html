@@ -8,6 +8,11 @@
     <body>
         <p>question</p>
         <input type="text" id="question" />
+        <p>answer</p>
+        <input type="text" id="answer" />
+        <br>
+        <br>
+        
         <button id="finish">Finish</button>
 
         <script>
@@ -22,13 +27,12 @@
             firebase.initializeApp(config);
 
             var database = firebase.database();
-            var qRef = database.ref("question")
-
-            $("#question").change(function() {
-                qRef.set($("#question").val());
-            });
+            var qRef = database.ref("question");
+            var aRef = database.ref("answer");
 
             $("#finish").click(function() {
+                qRef.set($("#question").val());
+                aRef.set($("#answer").val());
                 location.href = "index.html"
             });
         </script>
