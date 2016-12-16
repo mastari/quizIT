@@ -2,6 +2,7 @@
 <html>
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.6.4/firebase.js"></script>
 <link rel="stylesheet" href="stylesheets.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <script src="script.js"> </script>
@@ -21,6 +22,8 @@
     </ul>
   </div>
 </nav>  <div class="items">
+        <p>Name:</p>
+        <input type="text" id="name" />
         <p>Question:</p>
         <input type="text" id="question" />
         <p>Answer:</p>
@@ -29,9 +32,8 @@
         <br>
         
         <button id="finish">Publish Quiz</button>
-        </div>  
+        </div>
         <script>
-            // Initialize Firebase
             var config = {
                 apiKey: "AIzaSyDwWGylVWs-p5R1d02KMXBgGW707QERx50",
                 authDomain: "teachus-1cf29.firebaseapp.com",
@@ -42,12 +44,21 @@
             firebase.initializeApp(config);
 
             var database = firebase.database();
-            var qRef = database.ref("question");
-            var aRef = database.ref("answer");
+            var quizesRef = database.ref("quizes/");
+
+            // var qRef = quizesRef.ref("question");
+            // var aRef = quizesRef.ref("answer");
 
             $("#finish").click(function() {
-                qRef.set($("#question").val());
-                aRef.set($("#answer").val());
+              console.log("finished")
+                // qRef.set($("#question").val());
+                // aRef.set($("#answer").val());
+                var quiz = {
+                  name: $("#name").val(),
+                  question: $("#question").val(),
+                  answer: $("#answer").val()
+                }
+                quizesRef.push(quiz);
                 location.href = "index.html"
             });
         </script>
