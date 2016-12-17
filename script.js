@@ -16,4 +16,3 @@ $( document ).ready(function() {
         "margin-top": centerH - centerH/2
     });
 });
-

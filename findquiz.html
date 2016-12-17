@@ -22,6 +22,7 @@
     </ul>
   </div>
 </nav>
+        <input type="text" id="find" />
         <table id="table">
             <thead>
                 <th>Name</th>
@@ -47,7 +48,20 @@
                     var key = keys[i];
                     var quiz = data[key];
                     var quizname = quiz["name"];
-                    $("table").append('<tr><td><a href="quiz.html?id='+key+'">'+quizname+'</a></td></tr>');
+                    $("table").append('<tr><td><a href="quiz.html?id='+key+'"class="quizname">'+quizname+'</a></td></tr>');
+                }
+            });
+
+            $("#find").change(function() {
+                var names = document.getElementsByClassName("quizname");
+                for(var i = 0; i < names.length; i++) {
+                    var name = names[i].innerHTML;
+                    var nameHtml = names[i];
+                    if(!name.toUpperCase().includes($("#find").val().toUpperCase())) {
+                        $(nameHtml).hide();
+                    } else {
+                        $(nameHtml).show();
+                    }
                 }
             });
         </script>
