@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/3.6.4/firebase.js"></script>
-        <link rel="stylesheet" href="stylesheets.css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-        <script src="script.js"> </script>
-        <title> Quiz Site - New Quiz </title>
-    </head>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.6.4/firebase.js"></script>
+    <link rel="stylesheet" href="stylesheets.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="script.js"> </script>
+    <title> Quiz Site - New Quiz </title>
+  </head>
   <body>
-    <nav class="navbar navbar">
+    <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="index.html">QuizIT</a>
+      <a class="navbar-brand" href="#"><img src="assets/logo.png" height="95" width="95"></a>
     </div>
     <ul class="nav navbar-nav">
       <li><a href="index.html">Home</a></li>
@@ -48,24 +48,78 @@
                 messagingSenderId: "562479337915"
             };
             firebase.initializeApp(config);
+    <nav class="navbar navbar">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="index.html">QuizIT</a>
+        </div>
+        <ul class="nav navbar-nav">
+          <li><a href="index.html">Home</a></li>
+          <li class="active"><a href="newquiz.html">Make Quiz</a></li>
+          <li><a href="findquiz.html">Do Quiz</a></li>
+          <li><a href="about.html">About</a></li>
+        </ul>
+      </div>
+    </nav>
+    <div class="items">
+      <h1 id="quizname"></h1>
+      <div id="quiz">
+        <!--<p><strong>Question:</strong></p>
+        <p id="question"></p>
+        <input type="text" id="answer" /><br><br>
+        <p id="correct"></p>-->
+      </div>
+      <button id="check">Check</button>
+      <br><br><br><br><br>
+      <p id="sharewfriends"><strong>Want to share this QuizIT with friends? Copy the share link!</strong></p>
+      <input type="text" value="" id="sharecode">
+    </div>
+    <script>
+      var config = {
+          apiKey: "AIzaSyDwWGylVWs-p5R1d02KMXBgGW707QERx50",
+          authDomain: "teachus-1cf29.firebaseapp.com",
+          databaseURL: "https://teachus-1cf29.firebaseio.com",
+          storageBucket: "teachus-1cf29.appspot.com",
+          messagingSenderId: "562479337915"
+      };
+      firebase.initializeApp(config);
+      
+      var database = firebase.database();
+      var quizRef = database.ref("quizes/"+getUrlVars()["id"]);
+      var quiz;
+      var questions;
+      var questionKeys;
+      
+      quizRef.once('value', (newquiz) => {
+          quiz = newquiz.val();
+          $("#quizname").append(quiz["name"]);
 
-            var database = firebase.database();
-            var quizRef = database.ref("quizes/"+getUrlVars()["id"]);
-            var quiz;
+          questions = quiz["questions"];
+          questionKeys = Object.keys(questions);
+
+          for(var i = 0; i < questionKeys.length; i++) {
+            $("#quiz").append("<p><b>"+questions[questionKeys[i]]["question"]+"</b></p><input type='text' id='answer' /><p id='correct'></p>")
+          }
+      });
+      
+      $("#check").click(function() {
+        //   var answer = $("#answer").val();
+        //   var c = $("#correct");
+        //   if(answer == quiz["answer"]) {
+        //       c.empty();
+        //       c.append("Correct!");
+        //   }  else {
+        //       c.empty();
+        //       c.append("Incorrect!"); 
+        // }
+
+        // questions.filter(function(val) {
             
-            quizRef.once('value', function(newquiz) {
-                quiz = newquiz.val();
-                $("#quizname").append(quiz["name"]);
-                $("#question").append(quiz["question"]);
-                if (quiz["question2"] != "") {
-                    $("#question2").append(quiz["question2"]);
-                } else {
-                    $("#question2").hide();
-                    $("#answer2").hide();
-                    $("#check2").hide();
-                    $("#q2").hide();
-            }
-            });
+        // })
+
+        // questions.map(function(val) {
+        //     return val.answer;
+        // })
 
             $("#check").click(function() {
                 var answer = $("#answer").val();
@@ -99,19 +153,37 @@
                     });
                     c.append("Incorrect!"); }
             });
+
+        var quizanswers = $("[id = 'answer']")
+        var quizcorrects = $("[id = 'correct']")
         
-            function getUrlVars() {
-                var vars = [], hash;
-                var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
-                for(var i = 0; i < hashes.length; i++) {
-                    hash = hashes[i].split('=');
-                    vars.push(hash[0]);
-                    vars[hash[0]] = hash[1];
-                }
-                return vars;
-            }
-            var share = $("#sharecode").val();
-            $('#sharecode').val(window.location.href);
-        </script>
-    </body>
+        for(var i = 0; i < questionKeys.length; i++) {
+          var quizanswer = $(quizanswers[i]).val()
+          var realanswer = questions[questionKeys[i]]["answer"]
+          var c = $(quizcorrects[i])
+
+          if(quizanswer == realanswer) {
+            c.empty();
+            c.append("Correct!");
+          } else {
+            c.empty();
+            c.append("Incorrect!");
+          }
+        }
+      });
+      
+      function getUrlVars() {
+          var vars = [], hash;
+          var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+          for(var i = 0; i < hashes.length; i++) {
+              hash = hashes[i].split('=');
+              vars.push(hash[0]);
+              vars[hash[0]] = hash[1];
+          }
+          return vars;
+      }
+      var share = $("#sharecode").val();
+      $('#sharecode').val(window.location.href);
+    </script>
+  </body>
 </html>
