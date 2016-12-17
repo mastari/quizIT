@@ -1,69 +1,68 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/3.6.4/firebase.js"></script>
-        <link rel="stylesheet" href="stylesheets.css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-        <script src="script.js"> </script>
-        <title> Quiz Site - Find Quiz </title>
-    </head>
-
-    <body>   <nav class="navbar navbar">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">QuizIT</a>
-    </div>
-    <ul class="nav navbar-nav">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="newquiz.html">Make Quiz</a></li>
-      <li><a href="findquiz.html">Do Quiz</a></li>
-      <li><a href="about.html">About</a></li>
-    </ul>
-  </div>
-</nav>
-        <input type="text" id="find" />
-        <table id="table">
-            <thead>
-                <th>Name</th>
-            </thead>
-        </table>
-
-        <script>
-            var config = {
-                apiKey: "AIzaSyDwWGylVWs-p5R1d02KMXBgGW707QERx50",
-                authDomain: "teachus-1cf29.firebaseapp.com",
-                databaseURL: "https://teachus-1cf29.firebaseio.com",
-                storageBucket: "teachus-1cf29.appspot.com",
-                messagingSenderId: "562479337915"
-            };
-            firebase.initializeApp(config);
-
-            var database = firebase.database();
-            var quizesRef = database.ref("quizes");
-            quizesRef.once('value').then((snap) => {
-                let data = snap.val();
-                var keys = Object.keys(data);
-                for(var i = 0; i < keys.length; i++) {
-                    var key = keys[i];
-                    var quiz = data[key];
-                    var quizname = quiz["name"];
-                    $("table").append('<tr><td><a href="quiz.html?id='+key+'"class="quizname">'+quizname+'</a></td></tr>');
-                }
-            });
-
-            $("#find").keyup(function() {
-                var names = document.getElementsByClassName("quizname");
-                for(var i = 0; i < names.length; i++) {
-                    var name = names[i].innerHTML;
-                    var nameHtml = names[i];
-                    if(!name.toUpperCase().includes($("#find").val().toUpperCase())) {
-                        $(nameHtml).hide();
-                    } else {
-                        $(nameHtml).show();
-                    }
-                }
-            });
-        </script>
-    </body>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.6.4/firebase.js"></script>
+    <link rel="stylesheet" href="stylesheets.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="script.js"> </script>
+    <title> Quiz Site - Find Quiz </title>
+  </head>
+  <body>
+    <nav class="navbar navbar">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">QuizIT</a>
+        </div>
+        <ul class="nav navbar-nav">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="newquiz.html">Make Quiz</a></li>
+          <li><a href="findquiz.html">Do Quiz</a></li>
+          <li><a href="about.html">About</a></li>
+        </ul>
+      </div>
+    </nav>
+    <input type="text" id="find" />
+    <table id="table">
+      <thead>
+        <th>Name</th>
+      </thead>
+    </table>
+    <script>
+      var config = {
+          apiKey: "AIzaSyDwWGylVWs-p5R1d02KMXBgGW707QERx50",
+          authDomain: "teachus-1cf29.firebaseapp.com",
+          databaseURL: "https://teachus-1cf29.firebaseio.com",
+          storageBucket: "teachus-1cf29.appspot.com",
+          messagingSenderId: "562479337915"
+      };
+      firebase.initializeApp(config);
+      
+      var database = firebase.database();
+      var quizesRef = database.ref("quizes");
+      quizesRef.once('value').then((snap) => {
+          let data = snap.val();
+          var keys = Object.keys(data);
+          for(var i = 0; i < keys.length; i++) {
+              var key = keys[i];
+              var quiz = data[key];
+              var quizname = quiz["name"];
+              $("table").append('<tr><td><a href="quiz.html?id='+key+'"class="quizname">'+quizname+'</a></td></tr>');
+          }
+      });
+      
+      $("#find").keyup(function() {
+          var names = document.getElementsByClassName("quizname");
+          for(var i = 0; i < names.length; i++) {
+              var name = names[i].innerHTML;
+              var nameHtml = names[i];
+              if(!name.toUpperCase().includes($("#find").val().toUpperCase())) {
+                  $(nameHtml).hide();
+              } else {
+                  $(nameHtml).show();
+              }
+          }
+      });
+    </script>
+  </body>
 </html>
