@@ -26,14 +26,6 @@
       <div id="quizthing">
         <p>Name:</p>
         <input type="text" id="name" />
-        <form id="quizForm" class="quiz">
-          <p>Question:</p>
-          <input type="text" id="question" />
-          <p>Answer:</p>
-          <input type="text" id="answer" />
-          <br>
-          <br>
-        </form>
       </div>
       <button type="button" id="addquestion">Add Question</button>
       <br>
@@ -52,6 +44,9 @@
       
       var database = firebase.database();
       
+      $(document).ready(function() {
+        addQuestion()
+      })
       
       $("#finish").click(function() {
         var quizesRef = database.ref("quizes/");
@@ -61,7 +56,7 @@
         var quizRef = database.ref(newquizdblink);
         var questionsRef = database.ref(newquizdblink + "/questions")
       
-        var quizes = $(".quiz")
+        var quizes = $("[id = 'quizForm']")
       
         var quizJson = {
             name: $("#name").val()
@@ -79,10 +74,13 @@
           }
           questionsRef.push(questionJson);
         }
+        //location.href = "index.html"
       });
-      $("#addquestion").click(function() {
-        $(".quiz").clone().appendTo("#quizthing")
-      });
+      $("#addquestion").click(addQuestion);
+
+      function addQuestion() {
+        $("#quizthing").append('<form id="quizForm"><p>Question:</p><input type="text" id="question" /><p>Answer:</p><input type="text" id="answer" /><br><br></form>');
+      }
     </script>
   </body>
 </html>
