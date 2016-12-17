@@ -27,14 +27,14 @@
         <p><strong>Question:</strong></p>
         <p id="question"></p>
         <input type="text" id="answer" /><br><br>
+        <p id="correct" class="correcT"></p>
         <button id="check">Check</button>
-        <p id="correct"></p><br><br>
+        <br><br>
         <p id="q2"><strong>Question 2:</strong></p>
         <p id="question2"></p>
         <input type="text" id="answer2" /><br><br>
+        <p id="correct2" class="correcT"></p>
         <button id="check2">Check</button>
-        
-        <p id="correct2"></p>
 <br><br><br><br><br>
 <p id="sharewfriends"><strong>Want to share this QuizIT with friends? Copy the share link!</strong></p>
         <input type="text" value="" id="sharecode">
@@ -72,9 +72,15 @@
                 var c = $("#correct");
                 if(answer == quiz["answer"]) {
                     c.empty();
+                    $("#correct").css({
+                        "color": "limegreen"
+                    });
                     c.append("Correct!");
                 }  else {
                     c.empty();
+                    $("#correct").css({
+                        "color": "red"
+                    });
                     c.append("Incorrect!"); }
             });
             $("#check2").click(function() {
@@ -82,9 +88,15 @@
                 var c = $("#correct2");
                 if(answer == quiz["answer2"]) {
                     c.empty();
+                    $("#correct2").css({
+                        "color": "limegreen"
+                    });
                     c.append("Correct!");
                 }  else {
                     c.empty();
+                    $("#correct2").css({
+                        "color": "red"
+                    });
                     c.append("Incorrect!"); }
             });
         
