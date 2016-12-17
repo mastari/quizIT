@@ -52,7 +52,7 @@
                 }
             });
 
-            $("#find").change(function() {
+            $("#find").keyup(function() {
                 var names = document.getElementsByClassName("quizname");
                 for(var i = 0; i < names.length; i++) {
                     var name = names[i].innerHTML;
