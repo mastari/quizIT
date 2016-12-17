@@ -10,7 +10,7 @@ $( document ).ready(function() {
         "margin-left": centerW - (centerW/5),
         "margin-top": centerH - centerH/2
     });
-    $('#table').css({
+    $('.table').css({
         "margin-right": centerW - (centerW/50),
         "margin-left": centerW - (centerW/5),
         "margin-top": centerH - centerH/2

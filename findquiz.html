@@ -21,11 +21,13 @@
       <li><a href="about.html">About</a></li>
     </ul>
   </div>
-</nav>
-        <input type="text" id="find" />
-        <table id="table">
+</nav><div id="find">
+<h3>Filter Search Results </h3>
+        <input type="text" placeholder="Filter Quiz Results"/>
+        <table class="table">
+            </div>
             <thead>
-                <th>Name</th>
+                <th id="headerNAME">Quiz Name</th>
             </thead>
         </table>
 
@@ -48,7 +50,7 @@
                     var key = keys[i];
                     var quiz = data[key];
                     var quizname = quiz["name"];
-                    $("table").append('<tr><td><a href="quiz.html?id='+key+'"class="quizname">'+quizname+'</a></td></tr>');
+                    $("table").append('<tr><td class="searchITEM"><a href="quiz.html?id='+key+'"class="quizname">'+quizname+'</a></td></tr>');
                 }
             });
 

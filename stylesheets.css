@@ -27,3 +27,15 @@
 #table {
   font-size: 60px;
 }
+#find {
+  padding: 10px;
+  border-width: 1px;
+  border-color: black;
+  border-style: solid;
+}
+#headerNAME {
+  font-size: 45px;
+}
+.searchITEM {
+  font-size: 20px;
+}
